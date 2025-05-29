@@ -59,12 +59,12 @@
                 <input type="color" name="color_tip" id="color_tip" title="Color Tipografia">
             </div>
             <br>
-            <div class="escritura" id="escritura" contenteditable="true">
+            <div class="escritura" name="escritura" id="escritura" contenteditable="true">
                 <p>---Dejanos tu noticia---</p>
             </div>
             <br>
             <div>
-                <input class="boton_enviar" type="button" value="Enviar">
+                <input class="boton_enviar" type="button" value="Enviar" name="boton">
             </div>
     </div>
     <script src="evento.js"></script>
