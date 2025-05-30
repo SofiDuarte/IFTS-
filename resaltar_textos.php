@@ -63,9 +63,9 @@
                 <p>---Dejanos tu noticia---</p>
             </div>
             <br>
-            <div>
+            <div class="botones">
                 <button id="btnGuardar" class="boton_enviar">Guardar</button>
-                <button id="btnVerUltima" class="boton_enviar">Ver última noticia guardada</button>
+                <button id="btnVerUltima" class="boton_ultimanot">Ver última noticia guardada</button>
             </div>
     </div>
     <script src="evento.js"></script>
@@ -88,7 +88,7 @@
                 <?php
                 // Conexión y carga dinámica de categorías
                 try {
-                    $conexion = new PDO("mysql:host=localhost;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
+                    $conexion = new PDO("mysql:host=localhost;dbname=base_datos_ifts;charset=utf8", "root", "");
                     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $stmt = $conexion->query("SELECT id, nombre FROM categorias ORDER BY nombre ASC");
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -115,7 +115,7 @@
 
         <?php
         try {
-            $conexion = new PDO("mysql:host=localhost;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
+            $conexion = new PDO("mysql:host=localhost;dbname=base_datos_ifts;charset=utf8", "root", "");
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = $conexion->query("SELECT * FROM noticias ORDER BY id DESC LIMIT 1");

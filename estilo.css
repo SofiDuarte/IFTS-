@@ -77,14 +77,32 @@ body{
   list-style-type: disc;
 }
 
+.botones{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 .boton_enviar{
     border-radius: 40px;
     background-color: #67DF55;
     border-color:#67DF55; 
     margin: 5px;
     width: 188px;
-    height: 34.67px;
+    height: 45px;
     font-family: 'LexendMega-ExtraLight';
     font-size: 16px;
   
+}
+
+.boton_ultimanot{
+    border-radius: 40px;
+    background-color: #67DF55;
+    border-color:#67DF55; 
+    margin: 5px;
+    font-family: 'LexendMega-ExtraLight';
+    font-size: 16px;
+    text-align: center;
+    width: 215px;
+    height: 45px;
 }
