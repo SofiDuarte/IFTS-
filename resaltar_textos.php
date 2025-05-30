@@ -64,9 +64,80 @@
             </div>
             <br>
             <div>
-                <input class="boton_enviar" type="button" value="Enviar" name="boton">
+                <button id="btnGuardar" class="boton_enviar">Guardar</button>
+                <button id="btnVerUltima" class="boton_enviar">Ver última noticia guardada</button>
             </div>
     </div>
     <script src="evento.js"></script>
+    <!--MODAL CARGA DATOS FALTANTES --> 
+    <dialog id="modalGuardar" style="border:none; border-radius:20px; padding:20px; width:500px;">
+        <form method="post" id="formGuardar" action="guardar_noticia.php">
+            <h3 style="font-family: 'LexendMega-Regular'; margin-bottom: 10px;">Completar datos de la noticia</h3>
+
+            <label>Carrera:</label><br>
+            <input type="text" name="carrera" required style="width:100%;"><br><br>
+
+            <label>Título:</label><br>
+            <input type="text" name="titulo" required style="width:100%;"><br><br>
+
+            <label>Resumen:</label><br>
+            <textarea name="resumen" required style="width:100%; height:60px;"></textarea><br><br>
+
+            <label>Categoría:</label><br>
+            <select name="categoria_id" required style="width:100%;">
+                <?php
+                // Conexión y carga dinámica de categorías
+                try {
+                    $conexion = new PDO("mysql:host=localhost;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
+                    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $stmt = $conexion->query("SELECT id, nombre FROM categorias ORDER BY nombre ASC");
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<option value='{$row['id']}'>" . htmlspecialchars($row['nombre']) . "</option>";
+                    }
+                } catch (PDOException $e) {
+                    echo "<option disabled>Error al cargar categorías</option>";
+                }
+                ?>
+            </select><br><br>
+
+            <input type="hidden" name="contenido" id="contenidoOculto">
+
+            <div style="display:flex; justify-content:space-between; margin-top: 10px;">
+                <button type="button" onclick="document.getElementById('modalGuardar').close()" style="padding: 5px 15px;">Cancelar</button>
+                <button type="submit" style="padding: 5px 15px;">Guardar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!--MODAL VER ULTIMA NOTICIA -->
+    <dialog id="modalUltimaNoticia" style="border:none; border-radius:20px; padding:20px; width:500px;">
+        <h3 style="font-family: 'LexendMega-Regular'; margin-bottom: 10px;">Última noticia guardada</h3>
+
+        <?php
+        try {
+            $conexion = new PDO("mysql:host=localhost;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $conexion->query("SELECT * FROM noticias ORDER BY id DESC LIMIT 1");
+            $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($noticia) {
+                echo "<p><strong>Carrera:</strong> " . htmlspecialchars($noticia['carrera']) . "</p>";
+                echo "<p><strong>Título:</strong> " . htmlspecialchars($noticia['titulo']) . "</p>";
+                echo "<p><strong>Resumen:</strong> " . htmlspecialchars($noticia['resumen']) . "</p>";
+                echo "<p><strong>Contenido:</strong></p>";
+                echo "<div style='border:1px solid #ccc; padding:10px; margin-top:5px; max-height:200px; overflow:auto; background:#f9f9f9'>" . $noticia['contenido'] . "</div>";
+            } else {
+                echo "<p>No hay noticias registradas.</p>";
+            }
+        } catch (PDOException $e) {
+            echo "<p>Error al consultar la base de datos: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
+        ?>
+
+        <div style="text-align:right; margin-top:15px;">
+            <button onclick="document.getElementById('modalUltimaNoticia').close()">Cerrar</button>
+        </div>
+        </dialog>
 </body>
 </html>

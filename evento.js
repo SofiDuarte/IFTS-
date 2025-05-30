@@ -33,3 +33,15 @@ document.getElementById("color_tip").addEventListener("change", function () {
   format("foreColor", this.value);
 });
 
+/*Guardar: abrir modal y pasar contenido del editor al campo oculto*/
+document.getElementById("btnGuardar").addEventListener("click", function () {
+  const editor = document.querySelector(".escritura");
+  const contenido = editor.innerHTML;
+  document.getElementById("contenidoOculto").value = contenido;
+  document.getElementById("modalGuardar").showModal();
+});
+
+/*abrir modal ULTIMA NOTICIA*/
+document.getElementById("btnVerUltima").addEventListener("click", function () {
+  document.getElementById("modalUltimaNoticia").showModal();
+});
