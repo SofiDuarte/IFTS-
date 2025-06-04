@@ -1,10 +1,22 @@
+<?php
+// Conexión anticipada para cargar las categorías
+try {
+    $conexion = new PDO("mysql:host=localhost;port=3307;dbname=base0_datos_ifts;charset=utf8", "root", "");
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $categorias = $conexion->query("SELECT id, nombre FROM categorias ORDER BY nombre ASC")->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $categorias = [];
+    $errorCategorias = $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <link rel="stylesheet" href="estilo.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="estilo.css">
     <title>Document</title>
 </head>
 <body>
@@ -85,17 +97,14 @@
 
             <label>Categoría:</label><br>
             <select name="categoria_id" required style="width:100%;">
+                <!--Conexión y carga dinámica de categorías-->
                 <?php
-                // Conexión y carga dinámica de categorías
-                try {
-                    $conexion = new PDO("mysql:host=localhost;dbname=base_datos_ifts;charset=utf8", "root", "");
-                    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $stmt = $conexion->query("SELECT id, nombre FROM categorias ORDER BY nombre ASC");
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<option value='{$row['id']}'>" . htmlspecialchars($row['nombre']) . "</option>";
+                if (!empty($categorias)) {
+                    foreach ($categorias as $cat) {
+                        echo "<option value='{$cat['id']}'>" . htmlspecialchars($cat['nombre']) . "</option>";
                     }
-                } catch (PDOException $e) {
-                    echo "<option disabled>Error al cargar categorías</option>";
+                } else {
+                    echo "<option disabled>Error al cargar categorías: " . htmlspecialchars($errorCategorias ?? 'Sin datos') . "</option>";
                 }
                 ?>
             </select><br><br>
@@ -115,7 +124,7 @@
 
         <?php
         try {
-            $conexion = new PDO("mysql:host=localhost;dbname=base_datos_ifts;charset=utf8", "root", "");
+            $conexion = new PDO("mysql:host=127.0.0.1;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = $conexion->query("SELECT * FROM noticias ORDER BY id DESC LIMIT 1");

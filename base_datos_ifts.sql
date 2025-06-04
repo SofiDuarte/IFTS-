@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 30-05-2025 a las 05:54:03
+-- Tiempo de generación: 03-06-2025 a las 00:07:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -72,7 +72,9 @@ CREATE TABLE `noticias` (
 
 INSERT INTO `noticias` (`id`, `carrera`, `titulo`, `contenido`, `resumen`, `fecha_publicacion`, `imagen`, `Documento`, `profesor_id`) VALUES
 (17, 'Sistemas', 'Título ejemplo 17', 'Contenido ejemplo 17', 'Resumen 17', '2025-05-30 00:51:24', NULL, NULL, NULL),
-(45, 'TIC', 'Título ejemplo 45', 'Contenido ejemplo 45', 'Resumen 45', '2025-05-30 00:51:24', NULL, NULL, NULL);
+(45, 'TIC', 'Título ejemplo 45', 'Contenido ejemplo 45', 'Resumen 45', '2025-05-30 00:51:24', NULL, NULL, NULL),
+(47, 'Desarrolo de Software', 'Es un prueba', '\n                <p style=\"\"><i style=\"background-color: rgb(154, 226, 18);\"><font face=\"Georgia\">Un tigre que cuando cachorro habia sido capturado por humanos fue liberado luego de varios años de vida domestica. La vida entre los hombres no habia menguado sus fuerzas ni sus instintos; en cuanto lo liberaron, corrio a la selva. Ya en la espesura, sus hermanos teniéndolo otra vez entre ellos, le preguntaron:</font></i></p><p style=\"font-family: Roboto, sans-serif;\"><b style=\"\"><i><u>-¿Que has aprendido?</u></i></b></p><p style=\"font-family: Roboto, sans-serif;\"><b><font color=\"#e52a2a\">El tigre medito sin prisa. Quería transmitirles algún concepto sabio, trascendente. Recordó un comentario humano: \"Los tigres no son inmortales. Creen que son inmortales porque ignoran la muerte, ignoran que morirán.\"</font></b></p><p style=\"text-align: center; font-family: Roboto, sans-serif;\"><font color=\"#1a3cc1\" style=\"\">Ah, pensó el tigre para sus adentros, ese es un pensamiento que los sorprenderá: no somos inmortales, la vida no es eterna. -Aprendí esto- dijo por fin-. No somos inmortales solo ignoramos que alguna vez vamos a....</font></p><p style=\"text-align: center; font-style: italic;\"><font color=\"#1a3cc1\" style=\"\" face=\"Arial\">Los otros tigres no lo dejaron terminar de hablar, se abalanzaron sobre el, le mordieron el cuello y lo vieron desangrarse hasta morir. Es el problema de los enfermos de muerte -dijo uno de los felinos-. Se tornan resentidos y quieren contagiar a todos.\'\'</font></p><p style=\"font-style: italic;\"><font face=\"Courier New\" color=\"#488e29\"><b>Marcelo Birmajer,&nbsp;<em style=\"\">El tigre enferm</em></b></font></p>\n            ', 'Esto es para probar', '2025-05-30 06:33:07', NULL, NULL, NULL),
+(48, 'Desarrolo de Software', 'Es OTRA prueba', '\r\n                <p style=\"font-family: Roboto, sans-serif; font-style: italic;\"><font color=\"#e91616\">Un tigre que cuando cachorro habia sido capturado por humanos fue liberado luego de varios años de vida domestica. La vida entre los hombres no habia menguado sus fuerzas ni sus instintos; en cuanto lo liberaron, corrio a la selva. Ya en la espesura, sus hermanos teniéndolo otra vez entre ellos, le preguntaron:</font></p><p style=\"\"><span style=\"background-color: rgb(37, 208, 80);\"><b style=\"\"><font face=\"Georgia\">-¿Que has aprendido?</font></b></span></p><p style=\"text-align: center; font-family: Roboto, sans-serif;\"><font color=\"#2416e9\" style=\"\"><u style=\"\">El tigre medito sin prisa. Quería transmitirles algún concepto sabio, trascendente. Recordó un comentario humano: \"Los tigres no son inmortales. Creen que son inmortales porque ignoran la muerte, ignoran que morirán.\"</u></font></p><p style=\"text-align: left; font-family: Roboto, sans-serif;\"><font color=\"#22b954\" style=\"\"><b>Ah, pensó el tigre para sus adentros, ese es un pensamiento que los sorprenderá: no somos inmortales, la vida no es eterna. -Aprendí esto- dijo por fin-. No somos inmortales solo ignoramos que alguna vez vamos a....</b></font></p><p style=\"text-align: right;\"><font color=\"#a21589\" style=\"\" face=\"Arial\"><u style=\"\">Los otros tigres no lo dejaron terminar de hablar, se abalanzaron sobre el, le mordieron el cuello y lo vieron desangrarse hasta morir. Es el problema de los enfermos de muerte -dijo uno de los felinos-. Se tornan resentidos y quieren contagiar a todos.\'\'</u></font></p><p style=\"text-align: left;\"><u style=\"\"><b style=\"\"><font face=\"Courier New\">Marcelo Birmajer,&nbsp;El tigre enfermo</font></b></u></p>\r\n            ', 'Seguimos probando', '2025-05-30 06:43:41', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,8 +92,10 @@ CREATE TABLE `noticias_categorias` (
 --
 
 INSERT INTO `noticias_categorias` (`noticia_id`, `categoria_id`) VALUES
+(48, 2),
 (17, 4),
-(45, 4);
+(45, 4),
+(47, 7);
 
 --
 -- Índices para tablas volcadas
@@ -131,7 +135,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Restricciones para tablas volcadas
