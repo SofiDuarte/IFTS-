@@ -1,10 +1,5 @@
 <?php
-try {
-    $conexion = new PDO("mysql:host=127.0.0.1;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
-}
+require_once 'conexion_base.php';
 
 // RECOLECTA DATOS DEL FORMULARIO
 $carrera = $_POST['carrera'] ?? '';

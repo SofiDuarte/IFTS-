@@ -1,8 +1,8 @@
 <?php
-// Conexión anticipada para cargar las categorías
+require_once 'conexion_base.php';
+
+//OBTENER CATEGORIAS
 try {
-    $conexion = new PDO("mysql:host=localhost;port=3307;dbname=base0_datos_ifts;charset=utf8", "root", "");
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $categorias = $conexion->query("SELECT id, nombre FROM categorias ORDER BY nombre ASC")->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $categorias = [];
@@ -124,11 +124,13 @@ try {
 
         <?php
         try {
-            $conexion = new PDO("mysql:host=127.0.0.1;port=3307;dbname=base_datos_ifts;charset=utf8", "root", "");
-            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $conexion->query("SELECT * FROM noticias ORDER BY id DESC LIMIT 1");
+           $stmt = $conexion->query(" SELECT n.*, c.nombre AS categoria 
+                FROM noticias n LEFT JOIN noticias_categorias nc ON n.id = nc.noticia_id
+                LEFT JOIN categorias c ON nc.categoria_id = c.id
+                ORDER BY n.id DESC LIMIT 1
+            ");
             $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
             if ($noticia) {
                 echo "<p><strong>Carrera:</strong> " . htmlspecialchars($noticia['carrera']) . "</p>";
